@@ -36,7 +36,7 @@ function App() {
             </Routes>
           </Suspense>
         </BrowserRouter>
-        <ToastContainer />
+        <ToastContainer style={{width:"100px"}}/>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </UserDetailsContext.Provider>
