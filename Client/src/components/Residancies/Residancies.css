@@ -1,0 +1,39 @@
+.r-container{
+    overflow: hidden;
+    position: relative;
+}
+.r-head{
+    margin-bottom: 2rem;
+}
+
+.swiper-horizontal{
+    overflow: visible;
+}
+.r-buttons{
+    position: relative;
+    gap: 3rem;
+    /* top: -4rem; */
+    /* left: 0rem; */
+}
+.r-buttons button{
+     font-size: 1.2rem;
+      padding: 0.2rem 0.8rem;
+      color: blue;
+      border: none;
+      border-radius: 5px ;
+      background-color: white;
+      cursor: pointer;
+}
+@media (max-width :640px){
+    .r-container{
+        background: white;
+    }
+    .r-buttons{
+        margin-bottom: 1.3rem;
+        top: 1.2rem;
+    }
+    .r-head{
+        align-items: center;
+    }
+ 
+}
