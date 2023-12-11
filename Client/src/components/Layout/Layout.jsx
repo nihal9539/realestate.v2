@@ -9,36 +9,57 @@ import { createUser } from '../../utils/api'
 
 const Layout = () => {
 
-  const { isAuthenticated, user, getAccessTokenWithPopup} = useAuth0()
+  const { isAuthenticated, user, getAccessTokenWithPopup,getAccessTokenSilently } = useAuth0()
   const { setUserDeatils } = useContext(UserDetailsContext)
 
   const { mutate } = useMutation({
     mutationKey: [user?.email],
-    mutationFn: (token) => createUser(user?.email,token)
+    mutationFn: () => createUser(user?.email)
   })
 
+  // useEffect(() => {
+  //   const getTokenAndRegister = async () => {
+  //     const res = await getAccessTokenSilently({
+  //       authorizationParams: {
+  //         audience: "http://localhost:8000",
+  //         scope: 'openid profile email'
+  //       }
+  //     }
+  //     )
+  //     console.log(res);
+  //     localStorage.setItem("access_token", res)
+  //     setUserDeatils((prev) => ({ ...prev, token: res }))
+  //     console.log(res);
+  //   };
+  //   // isAuthenticated &&
+  //   getTokenAndRegister()
+  //   // getTokenAndRegister();
+  // }, [isAuthenticated])
   useEffect(() => {
-    const getTokenAndRegister = async () => {
+    const getTokenAndRegsiter = async () => {
+      console.log("trying to get the token")
       const res = await getAccessTokenWithPopup({
         authorizationParams: {
           audience: "http://localhost:8000",
-          scope: "openid profile email"
+          scope: "openid profile email",
         },
       });
-      localStorage.setItem("access_token", res)
-      setUserDeatils((prev) => ({prev, token: res }));
-      console.log(res);
+      console.log("token is : ",res);
+      localStorage.setItem("access_token", res);
+      setUserDeatils((prev) => ({ ...prev, token: res }));
       mutate(res)
-    }
-    isAuthenticated && getTokenAndRegister();
-  }, [isAuthenticated])
+    };
+
+   console.log(isAuthenticated);
+    isAuthenticated && getTokenAndRegsiter();
+  }, [isAuthenticated]);
   return (
     <>
       <div>
         <Header />
         <Outlet />
       </div>
-        <Footer />
+      <Footer />
     </>
   )
 }

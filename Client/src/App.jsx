@@ -15,13 +15,14 @@ function App() {
   const queryClient = new QueryClient()
   const [userDetails, setUserDetails] = useState({
     favourite: [],
-    bookingd: [],
+    bookings: [],
     token: null
   }
+  
   )
+  console.log(userDetails.token);
   return (
     <UserDetailsContext.Provider value={{ userDetails, setUserDetails }}>
-
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Suspense fallback={<div>Loading...</div>}>
