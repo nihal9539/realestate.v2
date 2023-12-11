@@ -10,6 +10,8 @@ import { FaCarAlt } from "react-icons/fa"
 import { MdMeetingRoom, MdLocationPin } from "react-icons/md"
 import Map from '../../components/Map/Map'
 import useAuthCheck from '../../hooks/useAuthCheck'
+import { useAuth0 } from '@auth0/auth0-react'
+import BookingModal from '../../components/BookingModal/BookingModal'
 const Property = () => {
     const { pathname } = useLocation()
     const id = pathname.split("/").slice(-1)[0]
@@ -19,6 +21,7 @@ const Property = () => {
 
     const [modelOpended,setModelOpended] = useState(false);
     const {validateLogin} = useAuthCheck()
+    const {user} = useAuth0()
     if (isLoading) {
         return (
             <div className="flexCenter paddings">
@@ -38,7 +41,7 @@ const Property = () => {
             <div className="flexColStart paddings innerWidth property-container">
                 <div className="like">
                     {/* Like button */}
-                    <AiFillHeart size={24} color='black' />
+                    <AiFillHeart size={24} color='white' />
                 </div>
 
                 {/* Image */}
@@ -93,11 +96,17 @@ const Property = () => {
                         {/* booking */}
                         <div className="flexCenter button"
                         onClick={()=>{
-                            validateLogin() && modelOpended(true)
+                            validateLogin() && setModelOpended(true)
                         }}
                         >
                             Book your Visit
                         </div>
+                        <BookingModal
+                        opened={modelOpended}
+                        setOpened={setModelOpended}
+                        propertyId = {id}
+                        email={user?.email}
+                        />
                     </div>
                     {/* Right Side */}
                     <div className="map">

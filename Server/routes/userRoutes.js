@@ -6,10 +6,10 @@ const router = express.Router()
 
 
 router.post('/register', createUser)
-router.post('/bookvisit/:id', bookvisit)
+router.post('/bookvisit/:id', jwtCheck, bookvisit)
 router.post('/getallbook', getAllBook)
-router.post('/removebooking/:id', cancelBooking)
-router.post('/tofav/:rid', toFav)
-router.post('/allfav',getAllFv)
+router.post('/removebooking/:id', jwtCheck, cancelBooking)
+router.post('/tofav/:rid', jwtCheck, toFav)
+router.post('/allfav', jwtCheck, getAllFv)
 
 export { router as userRoute }
