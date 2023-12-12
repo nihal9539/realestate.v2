@@ -9,32 +9,13 @@ import { createUser } from '../../utils/api'
 
 const Layout = () => {
 
-  const { isAuthenticated, user, getAccessTokenWithPopup,getAccessTokenSilently } = useAuth0()
+  const { isAuthenticated, user, getAccessTokenWithPopup } = useAuth0()
   const { setUserDeatils } = useContext(UserDetailsContext)
-
   const { mutate } = useMutation({
     mutationKey: [user?.email],
-    mutationFn: () => createUser(user?.email)
-  })
-
-  // useEffect(() => {
-  //   const getTokenAndRegister = async () => {
-  //     const res = await getAccessTokenSilently({
-  //       authorizationParams: {
-  //         audience: "http://localhost:8000",
-  //         scope: 'openid profile email'
-  //       }
-  //     }
-  //     )
-  //     console.log(res);
-  //     localStorage.setItem("access_token", res)
-  //     setUserDeatils((prev) => ({ ...prev, token: res }))
-  //     console.log(res);
-  //   };
-  //   // isAuthenticated &&
-  //   getTokenAndRegister()
-  //   // getTokenAndRegister();
-  // }, [isAuthenticated])
+    mutationFn: (token) => createUser(user?.email,token),
+  });
+  
   useEffect(() => {
     const getTokenAndRegsiter = async () => {
       console.log("trying to get the token")
@@ -42,15 +23,17 @@ const Layout = () => {
         authorizationParams: {
           audience: "http://localhost:8000",
           scope: "openid profile email",
+          
         },
       });
       console.log("token is : ",res);
+      console.log(setUserDeatils);
       localStorage.setItem("access_token", res);
-      setUserDeatils((prev) => ({ ...prev, token: res }));
+      // setUserDeatils((prev) => ({ ...prev, token: res }));
       mutate(res)
     };
 
-   console.log(isAuthenticated);
+
     isAuthenticated && getTokenAndRegsiter();
   }, [isAuthenticated]);
   return (

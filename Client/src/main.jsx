@@ -9,6 +9,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Auth0Provider
     domain="dev-brjjwu2les0rhoay.us.auth0.com"
     clientId="5VERUJy8xdDf936mexK9ldkKJo7Qk53H"
+    
     authorizationParams={{
       redirect_uri:"http://localhost:5173"
     }}
