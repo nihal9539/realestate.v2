@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Searchbar from '../../components/SearchBar/Searchbar'
 import './Properties.css'
 import useProperties from '../../hooks/useProperties';
@@ -8,6 +8,10 @@ import PropertyCard from '../../components/PropertyCard/PropertyCard';
 const Properties = () => {
   const {data,isError,isLoading} = useProperties();
     
+
+  const [modelOpened,setModelOpende] = useState(false)
+
+ 
   if (isError) {
     return (
       <div className='wrapper'>

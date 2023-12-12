@@ -19,9 +19,9 @@ const Property = () => {
     // console.log(data);
 
 
-    const [modelOpended,setModelOpended] = useState(false);
-    const {validateLogin} = useAuthCheck()
-    const {user} = useAuth0()
+    const [modelOpended, setModelOpended] = useState(false);
+    const { validateLogin } = useAuthCheck()
+    const { user } = useAuth0()
     if (isLoading) {
         return (
             <div className="flexCenter paddings">
@@ -95,17 +95,17 @@ const Property = () => {
                         </div>
                         {/* booking */}
                         <div className="flexCenter button"
-                        onClick={()=>{
-                            validateLogin() && setModelOpended(true)
-                        }}
+                            onClick={() => {
+                                validateLogin() && setModelOpended(true)
+                            }}
                         >
                             Book your Visit
                         </div>
                         <BookingModal
-                        opened={modelOpended}
-                        setOpened={setModelOpended}
-                        propertyId = {id}
-                        email={user?.email}
+                            opened={modelOpended}
+                            setOpened={setModelOpended}
+                            propertyId={id}
+                            email={user?.email}
                         />
                     </div>
                     {/* Right Side */}
