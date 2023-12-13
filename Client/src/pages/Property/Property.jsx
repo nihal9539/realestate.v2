@@ -11,7 +11,7 @@ import { MdMeetingRoom, MdLocationPin } from "react-icons/md"
 import Map from '../../components/Map/Map'
 import useAuthCheck from '../../hooks/useAuthCheck'
 import { useAuth0 } from '@auth0/auth0-react'
-import BookingModal from '../../components/BookingModal/BookingModal'
+import BookingModal from '../../components/BookingModal/BookingModal.jsx'
 const Property = () => {
     const { pathname } = useLocation()
     const id = pathname.split("/").slice(-1)[0]
@@ -96,14 +96,14 @@ const Property = () => {
                         {/* booking */}
                         <div className="flexCenter button"
                             onClick={() => {
-                                validateLogin() && setModelOpended(true)
+                                validateLogin() && setModelOpended(true) 
                             }}
                         >
                             Book your Visit
                         </div>
                         <BookingModal
                             opened={modelOpended}
-                            setOpened={setModelOpended}
+                            setopened={setModelOpended}
                             propertyId={id}
                             email={user?.email}
                         />

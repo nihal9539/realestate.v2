@@ -8,7 +8,7 @@ import ProfileMenu from '../ProfileMenu/ProfileMenu'
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+  const { loginWithRedirect, isAuthenticated,loginWithPopup, user, logout } = useAuth0();
 
   const getMenuStyles = (menuOpen) => {
     if (document.documentElement.clientWidth <= 800) {
@@ -43,7 +43,7 @@ const Header = () => {
             {/* Login */}
             {
               !isAuthenticated ?
-                <button className='button' onClick={loginWithRedirect}>
+                <button className='button' onClick={loginWithPopup}>
                   Login
                 </button> :
                 (

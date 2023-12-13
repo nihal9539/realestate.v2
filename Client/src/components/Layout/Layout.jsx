@@ -9,7 +9,7 @@ import { createUser } from '../../utils/api'
 
 const Layout = () => {
 
-  const { isAuthenticated, user, getAccessTokenWithPopup } = useAuth0()
+  const { isAuthenticated, user, getAccessTokenWithPopup ,getAccessTokenSilently} = useAuth0()
   const { setUserDeatils } = useContext(UserDetailsContext)
   const { mutate } = useMutation({
     mutationKey: [user?.email],
@@ -19,7 +19,7 @@ const Layout = () => {
   useEffect(() => {
     const getTokenAndRegsiter = async () => {
       console.log("trying to get the token")
-      const res = await getAccessTokenWithPopup({
+      const res = await getAccessTokenSilently({
         authorizationParams: {
           audience: "http://localhost:8000",
           scope: "openid profile email",
