@@ -15,9 +15,11 @@ import BookingModal from '../../components/BookingModal/BookingModal.jsx'
 import UserDetailsContext from '../../context/UserDetailsContext.js'
 import { Button } from '@mantine/core'
 import { toast } from 'react-toastify'
+import Heart from '../../components/Heart/Heart.jsx'
 const Property = () => {
     const { pathname } = useLocation()
     const id = pathname.split("/").slice(-1)[0]
+    console.log(id);
     const { data, isLoading, isError } = useQuery(["resd", id], () => getProperty(id));
     // console.log(data);
 
@@ -58,7 +60,7 @@ const Property = () => {
             <div className="flexColStart paddings innerWidth property-container">
                 <div className="like">
                     {/* Like button */}
-                    <AiFillHeart size={24} color='white' />
+                    <Heart id={id}/>
                 </div>
 
                 {/* Image */}

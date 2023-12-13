@@ -49,7 +49,7 @@ export const bookvisit = asyneHandler(async (req, res) => {
     }
 })
 export const getAllBook = asyneHandler(async (req, res) => {
-    const { email, bookvisits } = req.body;
+    const { email } = req.body;
 
 
     try {
@@ -135,6 +135,7 @@ export const toFav = asyneHandler(async (req, res) => {
         }
 
     } catch (error) {
+        console.log(error);
         throw new Error(err.massage)
 
     }

@@ -68,7 +68,7 @@ export const createUser = async (email, token) => {
 export const bookvisit = async (date, propertyId, email) => {
 
     try {
-        console.log( propertyId);
+        console.log(propertyId);
         console.log("hi");
         await api.post(
             `/user/bookvisit/${propertyId}`,
@@ -90,7 +90,7 @@ export const bookvisit = async (date, propertyId, email) => {
         throw error
     }
 }
-export const removeBooking = async (id, email,token) => {
+export const removeBooking = async (id, email, token) => {
 
     try {
 
@@ -109,5 +109,86 @@ export const removeBooking = async (id, email,token) => {
     } catch (error) {
         toast.error("Something went wrong,Please try again")
         throw error
+    }
+}
+export const tofav = async (id, email, token) => {
+
+    try {
+        let ids = id.id
+        await api.post(
+            `/user/tofav/${ids}`,
+            {
+                email
+            },
+            {
+                headers: {
+                    Authorization: `Bearer `
+                }
+            }
+        )
+
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+export const getAllFav = async (email, token) => {
+
+    if (!token) {
+        return
+    } else {
+
+        try {
+
+            const res = await api.post(
+                `/user/allfav`,
+                {
+                    email
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            console.log("reeeee");
+            console.log(res);
+            return res.data["favResidanciesID"]
+
+        } catch (error) {
+            toast.error("something went wrong")
+            console.log(error);
+            throw error
+        }
+    }
+}
+export const gwtAllBooking = async (email, token) => {
+
+    if (!token) {
+        return
+    } else {
+
+        try {
+
+            const res = await api.post(
+                `/user/getallbook`,
+                {
+                    email
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            console.log("reeeee");
+            console.log("res",res);
+            return res.data["bookVisits"]
+
+        } catch (error) {
+            toast.error("something went wrong while fetching booking")
+            console.log(error);
+            throw error
+        }
     }
 }
