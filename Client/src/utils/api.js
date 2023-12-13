@@ -75,7 +75,7 @@ export const bookvisit = async (date, propertyId, email) => {
             {
                 email,
                 id: propertyId,
-                date: date
+                date: dayjs(date).format('DD/MM/YYYY')
             },
             {
                 headers: {
@@ -87,6 +87,27 @@ export const bookvisit = async (date, propertyId, email) => {
     } catch (error) {
         toast.error("Something went wrong,Please tey again")
         console.log("error");
+        throw error
+    }
+}
+export const removeBooking = async (id, email,token) => {
+
+    try {
+
+        await api.post(
+            `/user/removebooking/${id}`,
+            {
+                email
+            },
+            {
+                headers: {
+                    Authorization: `Bearer `
+                }
+            }
+        )
+
+    } catch (error) {
+        toast.error("Something went wrong,Please try again")
         throw error
     }
 }

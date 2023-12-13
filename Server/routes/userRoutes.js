@@ -9,7 +9,7 @@ const router = express.Router()
 router.post('/register',jwtCheck, createUser)
 router.post('/bookvisit/:id',bookvisit)
 router.post('/getallbook', getAllBook)
-router.post('/removebooking/:id',jwtCheck, cancelBooking)
+router.post('/removebooking/:id', cancelBooking)
 router.post('/tofav/:rid',jwtCheck, toFav)
 router.post('/allfav',jwtCheck, getAllFv)
 

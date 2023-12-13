@@ -22,7 +22,7 @@ const Header = () => {
         {/* Logo */}
         <Link to="/">
 
-          <img src="./logo.png" alt="logo" width={100} />
+          <img src="./logo.png" alt="logo"width={100} />
         </Link>
         <OutsideClickHandler
           onOutsideClick={() => setMenuOpen(false)}
@@ -43,7 +43,7 @@ const Header = () => {
             {/* Login */}
             {
               !isAuthenticated ?
-                <button className='button' onClick={loginWithPopup}>
+                <button className='button'onClick={loginWithPopup}>
                   Login
                 </button> :
                 (
