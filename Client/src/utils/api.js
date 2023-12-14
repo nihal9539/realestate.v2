@@ -190,3 +190,22 @@ export const gwtAllBooking = async (email, token) => {
         }
     }
 }
+
+export const createResidancy = async (data,token)=>{
+    try {
+        const res = await api.post(
+            `/residancy/create`,
+            {
+                data
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        
+    } catch (error) {
+        throw error
+    }
+}

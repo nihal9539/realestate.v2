@@ -3,6 +3,7 @@ import { useForm } from "@mantine/form"
 import { Button, Group, Select, TextInput } from '@mantine/core'
 import useCountries from '../../hooks/useCountries'
 import Map from "../Map/Map"
+import {validateString} from "../../utils/common.js"
 
 const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
 
@@ -10,9 +11,9 @@ const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
 
     const form = useForm({
         initialValues: {
-            country: setPropertyDetails.country,
-            city: setPropertyDetails?.city,
-            address: propertyDetails?.address
+            country: propertyDetails.country,
+            city: propertyDetails.city,
+            address: propertyDetails.address
         },
 
         validate: {
@@ -25,10 +26,10 @@ const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
 
     const { country, city, address } = form.values;
 
-    const handleSubmit = ()=>{
-        const {isErrors} = form.values;
-        if(!isErrors){
-            setPropertyDetails((prev)=>({...prev,city,address,country}))
+    const handleSubmit = () => {
+        const { hasErrors } = form.validate();
+        if (!hasErrors) {
+            setPropertyDetails((prev) => ({ ...prev, city, address, country }))
             nextStep()
         }
     }
@@ -36,10 +37,10 @@ const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
         <div>
             <form action="
             "
-            onSubmit={(e)=>{
-                e.preventDefault()
-                handleSubmit()
-            }}
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    handleSubmit()
+                }}
             >
                 {/* lest side */}
                 <div className="flexCenter" style={{
@@ -52,11 +53,12 @@ const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
 
                     {/* inputs */}
 
-                    <div className="flexColStart" style={{flex:1,gap:"1rem"}}>
+                    <div className="flexColStart" style={{ flex: 1, gap: "1rem" }}>
                         <Select
                             w={"100%"}
                             withAsterisk
                             label="Country"
+                            // required
                             clearable
                             searchable
                             data={getAll()}
@@ -68,6 +70,8 @@ const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
                         <TextInput
                             w={"100%"}
                             withAsterisk
+                            // required
+                            // minLength={3}
                             label={"City"}
                             {
                             ...form.getInputProps("city", { type: "input" })
@@ -76,6 +80,8 @@ const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
                         <TextInput
                             w={"100%"}
                             withAsterisk
+                            // required
+                            // minLength={3}
                             label="Address"
                             {
                             ...form.getInputProps("address", { type: "input" })
@@ -93,7 +99,7 @@ const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
                 </div>
 
                 <Group position='center' mt={"xl"}>
-                    <Button  type='submit'>Next Step</Button>
+                    <Button type='submit'>Next Step</Button>
                 </Group>
 
             </form>
