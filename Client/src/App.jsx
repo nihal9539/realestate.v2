@@ -9,7 +9,8 @@ import { ReactQueryDevtools } from "react-query/devtools"
 import { ToastContainer } from 'react-toastify';
 import Property from './pages/Property/Property';
 import UserDetailsContext from './context/UserDetailsContext';
-// import 'react-toastify/dist/inject-style'
+import 'react-toastify/dist/inject-style'
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const queryClient = new QueryClient()
@@ -37,7 +38,7 @@ function App() {
             </Routes>
           </Suspense>
         </BrowserRouter>
-        <ToastContainer style={{width:"100px"}}/>
+        <ToastContainer style={{width:"300px"}}/>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </UserDetailsContext.Provider>

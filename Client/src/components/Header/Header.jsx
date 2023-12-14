@@ -5,10 +5,21 @@ import OutsideClickHandler from "react-outside-click-handler"
 import { Link, NavLink } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import ProfileMenu from '../ProfileMenu/ProfileMenu'
+import AddPropertyModel from '../AddPropertyModel/AddPropertyModel'
+import useAuthCheck from '../../hooks/useAuthCheck'
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { loginWithRedirect, isAuthenticated,loginWithPopup, user, logout } = useAuth0();
+
+  const [modelOpened,setModelOpened] = useState(false)
+  const {validateLogin} = useAuthCheck()
+  const handleAddProprtyClick = ()=>{
+     if (validateLogin()) {
+      setModelOpened(true)
+      console.log("hiiii");
+     }
+  }
 
   const getMenuStyles = (menuOpen) => {
     if (document.documentElement.clientWidth <= 800) {
@@ -40,6 +51,13 @@ const Header = () => {
             <a href="#">Contact</a>
 
 
+            {/* add propertymodel */}
+
+            <div onClick={handleAddProprtyClick}>Add property </div>
+            <AddPropertyModel
+            open={modelOpened}
+            setOpen={setModelOpened}
+            />
             {/* Login */}
             {
               !isAuthenticated ?

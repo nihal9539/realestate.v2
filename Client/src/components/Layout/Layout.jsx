@@ -12,7 +12,7 @@ import useBooking from '../../hooks/useBooking.jsx'
 const Layout = () => {
   useFavourite()
   useBooking()
-  const { isAuthenticated, user, getAccessTokenWithPopup, getAccessTokenSilently } = useAuth0()
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0()
   const { setUserDetails } = useContext(UserDetailsContext)
   const { mutate } = useMutation({
     mutationKey: [user?.email],

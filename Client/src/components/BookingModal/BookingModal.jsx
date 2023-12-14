@@ -26,13 +26,15 @@ const BookingModal = ({ opened, setopened, email, propertyId }) => {
         }
       ]
     }))
+    setValue(null)
   }
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => bookvisit(value, propertyId, email),
+    mutationFn: () => bookvisit(value, propertyId, email,token),
     onSuccess: () => handleBookingSucess(),
     onError: ({ response }) => toast.error(response.data.messge),
     onSettled: () => setopened(false)
+
 
   })
   return (

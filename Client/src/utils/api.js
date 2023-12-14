@@ -65,11 +65,9 @@ export const createUser = async (email, token) => {
         throw error
     }
 }
-export const bookvisit = async (date, propertyId, email) => {
+export const bookvisit = async (date, propertyId, email,token) => {
 
     try {
-        console.log(propertyId);
-        console.log("hi");
         await api.post(
             `/user/bookvisit/${propertyId}`,
             {
@@ -79,7 +77,7 @@ export const bookvisit = async (date, propertyId, email) => {
             },
             {
                 headers: {
-                    Authorization: `Bearer `
+                    Authorization: `Bearer ${token}`
                 }
             }
         )
@@ -152,7 +150,7 @@ export const getAllFav = async (email, token) => {
                 }
             );
             console.log("reeeee");
-            console.log(res);
+            console.log(res.data["favResidanciesID"]);
             return res.data["favResidanciesID"]
 
         } catch (error) {
@@ -182,7 +180,7 @@ export const gwtAllBooking = async (email, token) => {
                 }
             );
             console.log("reeeee");
-            console.log("res",res);
+            console.log("res",res.data["bookVisits"]);
             return res.data["bookVisits"]
 
         } catch (error) {
