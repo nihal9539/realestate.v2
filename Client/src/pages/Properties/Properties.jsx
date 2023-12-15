@@ -9,7 +9,7 @@ const Properties = () => {
   const {data,isError,isLoading} = useProperties();
     
 
-  const [modelOpened,setModelOpende] = useState(false)
+  const [filter,setFilter] = useState("")
 
  
   if (isError) {
@@ -36,10 +36,11 @@ const Properties = () => {
   return (
     <div className="wrapper">
       <div className="flexCenter paddings innerWidth properties-container">
-        <Searchbar className="seacrh-bar"/>
+        <Searchbar className="seacrh-bar" filter={filter} setFilter={setFilter}/>
         <div className="paddings flexCenter properties">
           {
-            data.map((card,i)=>(<PropertyCard card={card} key={i}/>))
+            // data.map((card,i)=>(<PropertyCard card={card} key={i}/>))
+            data.filter((property)=>property.title.toLowerCase().includes(filter.toLowerCase())).map((card,i)=>(<PropertyCard card={card} key={i}/>))
           }
         </div>
       </div>
