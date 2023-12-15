@@ -11,6 +11,7 @@ const AddPropertyModel = ({ open, setOpen }) => {
     const [active, setActive] = useState(0)
 
     const { user } = useAuth0();
+    // console.log(user.email);
 
     const [propertyDetails, setPropertyDetails] = useState({
         title: "",
@@ -27,6 +28,7 @@ const AddPropertyModel = ({ open, setOpen }) => {
         },
         userEmail: user?.email,
     });
+    console.log(propertyDetails);
     const nextStep = () => {
         setActive((current) => (current < 4 ? current + 1 : current));
     };

@@ -4,10 +4,13 @@ import { Button, Group, Select, TextInput } from '@mantine/core'
 import useCountries from '../../hooks/useCountries'
 import Map from "../Map/Map"
 import {validateString} from "../../utils/common.js"
+import { useAuth0 } from '@auth0/auth0-react'
 
 const AddLocation = ({ nextStep, propertyDetails, setPropertyDetails }) => {
 
     const { getAll } = useCountries()
+    const { user } = useAuth0();
+    console.log(user.email);
 
     const form = useForm({
         initialValues: {

@@ -6,6 +6,7 @@ import UserDetailsContext from "../../context/UserDetailsContext"
 import useProperties from "../../hooks/useProperties"
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
+import { createResidancy } from '../../utils/api';
 
 const Facilities = ({ propertyDetails, setPropertyDetails, prevStep, setOpened, setActiveStep }) => {
 
@@ -36,6 +37,7 @@ const Facilities = ({ propertyDetails, setPropertyDetails, prevStep, setOpened, 
     // ======== use Logic
 
     const { user } = useAuth0()
+  const userEmail = user.email
     const {
         userDetails: { token }
 
@@ -44,36 +46,36 @@ const Facilities = ({ propertyDetails, setPropertyDetails, prevStep, setOpened, 
     const { refresh: refetchProperties } = useProperties()
 
     const { mutate, isLoading } = useMutation({
-        mutationFn: () => createResidancy({
-            ...propertyDetails, facilities: { bedrooms, parkings, bathrooms }
-        }, token),
-        onError: ((response) => toast.error(response.data.message, { position: "bottom-right" })),
-        onSettled: (() =>
+        mutationFn: () => createResidancy({ ...propertyDetails, facilities: { bedrooms, parkings, bathrooms },userEmail:user?.email }, token),
+        onError: ((response) => toast.success(response.data.message, { position: "bottom-right" })),
+        onSettled: () => {
             toast.error("Added Successfully", { position: "bottom-right" }),
-            setPropertyDetails({
-                title: "",
-                description: "",
-                price: 0,
-                country: "",
-                city: "",
-                address: "",
-                image: null,
-                facilities: {
-                    bedrooms: 0,
-                    parkings: 0,
-                    bathrooms: 0,
-                },
-                userEmail: user?.email,
-            })
-            // setOpened(false),
-            // setActiveStep(0)
-            //  refetchProperties()
+                setPropertyDetails({
+                    title: "",
+                    description: "",
+                    price: 0,
+                    country: "",
+                    city: "",
+                    address: "",
+                    image: null,
+                    facilities: {
+                        bedrooms: 0,
+                        parkings: 0,
+                        bathrooms: 0,
+                    },
+                    userEmail: user?.email,
+                })
+            setOpened(false),
+                setActiveStep(0),
+                refetchProperties()
+        }
 
-        )
+
 
 
     })
     return (
+
         <Box maw="30%" mx="auto" my="md">
             <form
                 onSubmit={(e) => {

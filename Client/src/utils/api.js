@@ -193,6 +193,7 @@ export const gwtAllBooking = async (email, token) => {
 
 export const createResidancy = async (data,token)=>{
     try {
+        console.log(data,token);
         const res = await api.post(
             `/residancy/create`,
             {
@@ -204,6 +205,7 @@ export const createResidancy = async (data,token)=>{
                 }
             }
         );
+        console.log(res);
         
     } catch (error) {
         throw error
