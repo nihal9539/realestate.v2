@@ -11,6 +11,8 @@ import Property from './pages/Property/Property';
 import UserDetailsContext from './context/UserDetailsContext';
 import 'react-toastify/dist/inject-style'
 import "react-toastify/dist/ReactToastify.css";
+import Bookings from './pages/Bookings/Bookings';
+import Favorites from './pages/Favourites/Favourites';
 
 function App() {
   const queryClient = new QueryClient()
@@ -21,7 +23,7 @@ function App() {
   }
   
   )
-  console.log(userDetails.token);
+  console.log(userDetails.bookings);
   return (
     <UserDetailsContext.Provider value={{ userDetails, setUserDetails }}>
       <QueryClientProvider client={queryClient}>
@@ -34,6 +36,8 @@ function App() {
                   <Route index element={<Properties />} />
                   <Route path=':propertyId' element={<Property />} />
                 </Route>
+                <Route path='/bookings' element={<Bookings/>}/>
+                <Route path='/favourites' element={<Favorites/>}/>
               </Route>
             </Routes>
           </Suspense>

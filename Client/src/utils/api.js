@@ -61,7 +61,6 @@ export const createUser = async (email, token) => {
         // })
     } catch (error) {
         toast.error("Something went wrong,Please tey again")
-        console.log("error");
         throw error
     }
 }
@@ -83,7 +82,7 @@ export const bookvisit = async (date, propertyId, email,token) => {
         )
 
     } catch (error) {
-        toast.error("Something went wrong,Please tey again")
+        toast.error(`Something went wrong,Please tey again${error}`)
         console.log("error");
         throw error
     }

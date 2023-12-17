@@ -103,10 +103,10 @@ const Property = () => {
                             <span className='secondaryText' style={{ gap: "1rem" }}>
                                 {
                                     data.address
-                                }
+                                }{" "}
                                 {
                                     data.city
-                                }
+                                }{" "}
                                 {
                                     data.country
                                 }
@@ -136,7 +136,7 @@ const Property = () => {
 
                         <BookingModal
                             opened={modelOpended}
-                            setopened={setModelOpended}
+                            setOpened={setModelOpended}
                             propertyId={id}
                             email={user?.email}
                         />

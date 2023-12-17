@@ -42,7 +42,7 @@ const Value = () => {
                                     <AccordionItem className={`accordianitem ${className}`} key={index} uuid={index}>
                                         <AccordionItemHeading>
                                             <AccordionItemButton className='flexCenter accordianbutton'>
-                                                <AccordionItemState>
+                                                <AccordionItemState key={index}>
                                                     {({expanded}) =>
                                                         expanded
                                                             ? setClassName("expanded")

@@ -5,7 +5,6 @@ import { useAuth0 } from "@auth0/auth0-react"
 import UploadImage from '../UploadImage/UploadImage'
 import BasicDetails from '../BasicDetails/BasicDetails'
 import Facilities from '../Facilities/Facilities'
-import Check from '../Check/Check'
 
 const AddPropertyModel = ({ open, setOpen }) => {
     const [active, setActive] = useState(0)

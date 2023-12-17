@@ -10,14 +10,13 @@ import useAuthCheck from '../../hooks/useAuthCheck'
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { loginWithRedirect, isAuthenticated,loginWithPopup, user, logout } = useAuth0();
+  const {  isAuthenticated,loginWithPopup, user, logout } = useAuth0();
 
   const [modelOpened,setModelOpened] = useState(false)
   const {validateLogin} = useAuthCheck()
   const handleAddProprtyClick = ()=>{
      if (validateLogin()) {
       setModelOpened(true)
-      console.log("hiiii");
      }
   }
 
@@ -36,19 +35,15 @@ const Header = () => {
           <img src="./logo.png" alt="logo"width={100} />
         </Link>
         <OutsideClickHandler
-          onOutsideClick={() => setMenuOpen(false)}
+          onOutsideClick={() => {setMenuOpen(false)}}
         >
           {/* Menu */}
           <div className="flexCenter h-menu"
             style={getMenuStyles(menuOpen)}
           >
-            <NavLink to="/proporties">Properties</NavLink>
-            {/* <a href="">Residance</a>
-            <a href="">Our Value</a>
-            <a href="">Contact us</a>
-            <a href="">Get Start</a> */}
-            {/* login button */}
-            <a href="#">Contact</a>
+            <NavLink to="/proporties" onClick={()=>setMenuOpen(false)}>Properties</NavLink>
+         
+            <a href="#"  onClick={()=>setMenuOpen(false)}>Contact</a>
 
 
             {/* add propertymodel */}
