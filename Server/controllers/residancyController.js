@@ -36,6 +36,7 @@ export const createResidancy = asyneHandler(async (req, res) => {
 
 // Function to get all the residancy
 export const getAllResidancies = asyneHandler(async (req, res) => {
+    console.log("fetching residancy");
     const residancies = await prisma.residancy.findMany({
         orderBy: {
             createdAt: "desc"
