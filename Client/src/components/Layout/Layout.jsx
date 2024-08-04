@@ -24,7 +24,7 @@ const Layout = () => {
       console.log("trying to get the token")
       const res = await getAccessTokenSilently({
         authorizationParams: {
-          audience: "http://localhost:8000",
+          audience: "https://realestate-v2-two.vercel.app",
           scope: "openid profile email",
 
         },
